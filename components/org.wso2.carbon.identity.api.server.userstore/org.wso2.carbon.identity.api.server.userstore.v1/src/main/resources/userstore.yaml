@@ -358,9 +358,9 @@ paths:
         This API provides the capability to retrieve the attribute mappings
         of a given user store type
 
-         <b>Permission required:</b>
+         <b>Permission required:</b><br>
 
-        */permission/admin
+        */permission/admin/manage/identity/userstore/config/view
       parameters:
         - in: path
           name: type-id
@@ -379,6 +379,8 @@ paths:
           $ref: '#/components/responses/InvalidInput'
         '401':
           $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -855,30 +857,37 @@ components:
       properties:
         typeName:
           type: string
+          description: Type name of the userstore.
           example: org.wso2.carbon.user.core.ldap.UniqueIDActiveDirectoryUserStoreManager
         typeId:
           type: string
+          description: Type id of the userstore.
           example: b3JnLndzbzIuY2FyYm9uLnVzZXIuY29yZS5qZGJjLkpEQkNVc2VyU3RvcmVNYW5hZ2Vy
         isLocal:
           type: boolean
-          description: Is the userstore is a local userstore or not
+          description: Whether the userstore is local or not.
           example: true
         attributeMappings:
           type: array
+          description: Attribute mappings.
           items:
-            $ref: '#/components/schemas/UserStoreAttribute'
-    UserStoreAttribute:
+            $ref: '#/components/schemas/UserStoreAttributeRes'
+    UserStoreAttributeRes:
       type: object
       properties:
         claimId:
           type: string
+          description: Claim id of the attribute.
           example: bzIuY2FyYm9uLnVzZXIuY29yZS5qZG
         claimURI:
           type: string
+          description: Claim uri of the attribute.
           example: http://wso2.org/claims/givenname
         mappedAttribute:
           type: string
+          description: Mapped userstore attribute.
           example: givenName
         displayName:
           type: string
+          description: Display name of the attribute.
           example: First Name

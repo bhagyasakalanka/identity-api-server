@@ -30,6 +30,7 @@ import java.util.List;
 import org.wso2.carbon.identity.api.server.userstore.v1.model.MetaUserStoreType;
 import org.wso2.carbon.identity.api.server.userstore.v1.model.PatchDocument;
 import org.wso2.carbon.identity.api.server.userstore.v1.model.RDBMSConnectionReq;
+import org.wso2.carbon.identity.api.server.userstore.v1.model.UserStoreAttributeMapping;
 import org.wso2.carbon.identity.api.server.userstore.v1.model.UserStoreConfigurationsRes;
 import org.wso2.carbon.identity.api.server.userstore.v1.model.UserStoreListResponse;
 import org.wso2.carbon.identity.api.server.userstore.v1.model.UserStoreReq;
@@ -49,6 +50,8 @@ public interface UserstoresApiService {
 
       public Response getSecondaryUserStores(Integer limit, Integer offset, String filter, String sort, String requiredAttributes);
 
+      public Response getUserStoreAttributeMappings(String typeId);
+
       public Response getUserStoreByDomainId(String userstoreDomainId);
 
       public Response getUserStoreManagerProperties(String typeId);
@@ -60,6 +63,4 @@ public interface UserstoresApiService {
       public Response testRDBMSConnection(RDBMSConnectionReq rdBMSConnectionReq);
 
       public Response updateUserStore(String userstoreDomainId, UserStoreReq userStoreReq);
-
-      public Response getUserStoreMappingAttributes(String typeId);
 }

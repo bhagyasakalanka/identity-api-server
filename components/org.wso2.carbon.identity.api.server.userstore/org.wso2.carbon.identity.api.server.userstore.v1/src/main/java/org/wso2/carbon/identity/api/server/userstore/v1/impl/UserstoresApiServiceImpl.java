@@ -77,6 +77,12 @@ public class UserstoresApiServiceImpl implements UserstoresApiService {
     }
 
     @Override
+    public Response getUserStoreAttributeMappings(String typeId) {
+
+        return Response.ok().entity(serverUserStoreService.getUserStoreMappingAttributes(typeId)).build();
+    }
+
+    @Override
     public Response getUserStoreByDomainId(String userstoreDomainId) {
 
         return Response.ok().entity(serverUserStoreService.getUserStoreByDomainId(userstoreDomainId)).build();
@@ -112,12 +118,6 @@ public class UserstoresApiServiceImpl implements UserstoresApiService {
     public Response updateUserStore(String userstoreDomainId, UserStoreReq userStoreReq) {
 
         return Response.ok().entity(serverUserStoreService.editUserStore(userstoreDomainId, userStoreReq)).build();
-    }
-
-    @Override
-    public Response getUserStoreMappingAttributes(String typeId) {
-
-        return Response.ok().entity(serverUserStoreService.getUserStoreMappingAttributes(typeId)).build();
     }
 
     private URI getResourceLocation(String id) {

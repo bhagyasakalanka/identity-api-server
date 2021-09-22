@@ -29,6 +29,7 @@ import org.wso2.carbon.identity.api.server.common.error.APIError;
 import org.wso2.carbon.identity.api.server.common.error.ErrorResponse;
 import org.wso2.carbon.identity.api.server.userstore.common.UserStoreConfigServiceHolder;
 import org.wso2.carbon.identity.api.server.userstore.common.UserStoreConstants;
+import org.wso2.carbon.identity.api.server.userstore.v1.core.functions.userstore.AttributeMappingsToApiModel;
 import org.wso2.carbon.identity.api.server.userstore.v1.model.AddUserStorePropertiesRes;
 import org.wso2.carbon.identity.api.server.userstore.v1.model.Attribute;
 import org.wso2.carbon.identity.api.server.userstore.v1.model.AvailableUserStoreClassesRes;
@@ -1300,10 +1301,9 @@ public class ServerUserStoreService {
         }
         UserStoreAttributeMapping userStoreAttributeMapping = new UserStoreAttributeMapping();
         List<UserStoreAttributeDO> attributeMappings = getAttributeMappings(userStoreName);
-        userStoreAttributeMapping = userStoreAttributeMapping
-                .attributeMapping(attributeMappings)
-                .typeId(typeId)
-                .typeName(userStoreName);
+        userStoreAttributeMapping =
+                userStoreAttributeMapping.attributeMappings(new AttributeMappingsToApiModel().apply(attributeMappings))
+                        .typeId(typeId).typeName(userStoreName);
         try {
             boolean isLocal = UserStoreManagerRegistry.isLocalUserStore(userStoreName);
             userStoreAttributeMapping.setIsLocal(isLocal);
